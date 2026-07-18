@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BéninSanté360 — Santé · Sécurité · Bien-être</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg: #F7F5F0;
+  --white: #FFFFFF;
+  --dark: #1A1A2E;
+  --sante: #E8F5E9;
+  --sante-accent: #2E7D32;
+  --cyber: #E3F2FD;
+  --cyber-accent: #1565C0;
+  --stress: #FFF3E0;
+  --stress-accent: #E65100;
+  --text: #2C2C2C;
+  --muted: #6B7280;
+  --border: #E5E0D8;
+  --card: #FFFFFF;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  line-height: 1.6;
+}
+
+/* NAV */
+nav {
+  position: fixed; top:0; left:0; right:0; z-index:200;
+  background: rgba(247,245,240,0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 40px;
+  height: 64px;
+  display: flex; align-items:center; justify-content:space-between;
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem; font-weight: 900;
+  color: var(--dark);
+}
+.nav-logo span { color: var(--sante-accent); }
+.nav-links { display:flex; gap:8px; }
+.nav-links a {
+  text-decoration:none; color: var(--muted);
+  font-size: 0.88rem; font-weight:500;
+  padding: 6px 14px; border-radius:6px;
+  transition: background 0.2s, color 0.2s;
+}
+.nav-links a:hover { background: var(--border); color: var(--dark); }
+.nav-links a.active { background: var(--dark); color: #fff; }
+
+/* HERO */
+#hero {
+  min-height: 100vh;
+  display: flex; align-items:center;
+  padding: 80px 60px 60px;
+  background: var(--dark);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-pattern {
+  position:absolute; inset:0;
+  background-image: radial-gradient(circle at 20% 50%, rgba(46,125,50,0.15) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(21,101,192,0.15) 0%, transparent 50%),
+                    radial-gradient(circle at 60% 80%, rgba(230,81,0,0.1) 0%, transparent 50%);
+  pointer-events:none;
+}
+
+.hero-content {
+  max-width: 1100px; margin:0 auto;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items:center;
+  position:relative; z-index:1;
+}
+
+.hero-eyebrow {
+  display:inline-flex; align-items:center; gap:8px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 4px;
+  padding: 5px 12px;
+  font-size: 0.75rem; font-weight:600;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 1.5px; text-transform:uppercase;
+  margin-bottom: 20px;
+}
+.eyebrow-dot { width:6px; height:6px; border-radius:50%; background:#4CAF50; animation: pulse 2s infinite; }
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 4rem; font-weight: 900;
+  color: #fff; line-height: 1.05;
+  margin-bottom: 16px;
+}
+.hero-title .highlight { color: #66BB6A; }
+
+.hero-sub {
+  color: rgba(255,255,255,0.55);
+  font-size: 1.05rem; line-height: 1.8;
+  margin-bottom: 36px;
+}
+
+.hero-btns { display:flex; gap:12px; flex-wrap:wrap; }
+.btn-hero-main {
+  background: #2E7D32; color:#fff;
+  padding: 14px 28px; border-radius:8px;
+  text-decoration:none; font-weight:600; font-size:0.95rem;
+  transition: background 0.2s, transform 0.2s;
+}
+.btn-hero-main:hover { background:#1B5E20; transform:translateY(-2px); }
+.btn-hero-outline {
+  border: 1px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.8);
+  padding: 14px 28px; border-radius:8px;
+  text-decoration:none; font-weight:500; font-size:0.95rem;
+  transition: border-color 0.2s, background 0.2s;
+}
+.btn-hero-outline:hover { border-color:rgba(255,255,255,0.5); background:rgba(255,255,255,0.05); }
+
+/* Hero right - 3 pillars */
+.hero-pillars { display:flex; flex-direction:column; gap:16px; }
+.pillar {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius:12px; padding:20px 24px;
+  display:flex; align-items:center; gap:16px;
+  transition: background 0.3s, transform 0.3s;
+  cursor:pointer; text-decoration:none;
+}
+.pillar:hover { background:rgba(255,255,255,0.1); transform:translateX(6px); }
+.pillar-icon {
+  width:44px; height:44px; border-radius:10px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.3rem; flex-shrink:0;
+}
+.pillar-icon.p1 { background:rgba(46,125,50,0.3); }
+.pillar-icon.p2 { background:rgba(21,101,192,0.3); }
+.pillar-icon.p3 { background:rgba(230,81,0,0.3); }
+.pillar-text { color:#fff; }
+.pillar-title { font-weight:600; font-size:0.95rem; }
+.pillar-desc { font-size:0.8rem; color:rgba(255,255,255,0.5); margin-top:2px; }
+.pillar-arrow { margin-left:auto; color:rgba(255,255,255,0.3); font-size:1.2rem; }
+
+/* STATS BAR */
+.stats-bar {
+  background: var(--dark);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 28px 60px;
+  display:flex; justify-content:center; gap:80px;
+}
+.stat { text-align:center; }
+.stat-num {
+  font-family:'Playfair Display', serif;
+  font-size:2rem; font-weight:900; color:#fff;
+}
+.stat-num span { color:#66BB6A; }
+.stat-label { font-size:0.78rem; color:rgba(255,255,255,0.4); text-transform:uppercase; letter-spacing:1px; margin-top:4px; }
+
+/* SECTIONS */
+.section { padding: 80px 60px; }
+.section-inner { max-width:1100px; margin:0 auto; }
+
+.section-header { margin-bottom:48px; }
+.section-eyebrow {
+  font-size:0.75rem; font-weight:600; letter-spacing:2px; text-transform:uppercase;
+  margin-bottom:10px;
+}
+.section-eyebrow.green { color: var(--sante-accent); }
+.section-eyebrow.blue { color: var(--cyber-accent); }
+.section-eyebrow.orange { color: var(--stress-accent); }
+
+.section-title {
+  font-family:'Playfair Display', serif;
+  font-size:2.2rem; font-weight:900; color:var(--dark);
+  margin-bottom:12px;
+}
+.section-desc { color:var(--muted); font-size:1rem; max-width:600px; line-height:1.7; }
+
+/* CARDS GRID */
+.cards-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.cards-grid.two { grid-template-columns:repeat(2,1fr); }
+
+.card {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px; padding:28px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.card:hover { transform:translateY(-4px); box-shadow:0 12px 40px rgba(0,0,0,0.08); }
+
+.card-icon { font-size:1.8rem; margin-bottom:14px; }
+.card-title { font-weight:700; font-size:1rem; color:var(--dark); margin-bottom:8px; }
+.card-text { font-size:0.88rem; color:var(--muted); line-height:1.7; }
+
+.card-tag {
+  display:inline-block; margin-top:14px;
+  padding:3px 10px; border-radius:4px;
+  font-size:0.75rem; font-weight:600;
+}
+.tag-green { background:var(--sante); color:var(--sante-accent); }
+.tag-blue { background:var(--cyber); color:var(--cyber-accent); }
+.tag-orange { background:var(--stress); color:var(--stress-accent); }
+
+/* ACCORDION */
+.accordion { display:flex; flex-direction:column; gap:10px; }
+.acc-item {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:10px; overflow:hidden;
+}
+.acc-header {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:18px 22px; cursor:pointer;
+  font-weight:600; font-size:0.95rem; color:var(--dark);
+  transition: background 0.2s;
+  user-select:none;
+}
+.acc-header:hover { background:#F0EDE8; }
+.acc-arrow { transition:transform 0.3s; font-size:0.8rem; color:var(--muted); }
+.acc-item.open .acc-arrow { transform:rotate(180deg); }
+.acc-body {
+  max-height:0; overflow:hidden;
+  transition: max-height 0.4s ease, padding 0.3s;
+  padding:0 22px;
+  font-size:0.9rem; color:var(--muted); line-height:1.8;
+}
+.acc-item.open .acc-body { max-height:600px; padding:0 22px 20px; }
+.acc-body ul { padding-left:18px; margin-top:8px; }
+.acc-body li { margin-bottom:6px; }
+.acc-body strong { color:var(--dark); }
+
+/* QUIZ */
+.quiz-section {
+  background: var(--dark);
+  border-radius:16px; padding:40px;
+  margin-top:40px;
+}
+.quiz-title {
+  font-family:'Playfair Display', serif;
+  font-size:1.5rem; font-weight:900; color:#fff;
+  margin-bottom:6px;
+}
+.quiz-sub { color:rgba(255,255,255,0.5); font-size:0.9rem; margin-bottom:28px; }
+
+.quiz-tabs { display:flex; gap:8px; margin-bottom:28px; flex-wrap:wrap; }
+.quiz-tab {
+  padding:8px 18px; border-radius:6px; border:none; cursor:pointer;
+  font-family:'DM Sans', sans-serif; font-size:0.85rem; font-weight:600;
+  background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.6);
+  transition: background 0.2s, color 0.2s;
+}
+.quiz-tab.active { background:#2E7D32; color:#fff; }
+.quiz-tab:hover:not(.active) { background:rgba(255,255,255,0.15); }
+
+.quiz-question {
+  color:#fff; font-size:1.05rem; font-weight:500; margin-bottom:20px;
+  line-height:1.6;
+}
+.quiz-options { display:flex; flex-direction:column; gap:10px; margin-bottom:20px; }
+.quiz-option {
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:8px; padding:14px 18px;
+  color:rgba(255,255,255,0.8); cursor:pointer;
+  font-size:0.9rem; transition:all 0.2s;
+  text-align:left;
+}
+.quiz-option:hover { background:rgba(255,255,255,0.12); border-color:rgba(255,255,255,0.25); }
+.quiz-option.correct { background:rgba(46,125,50,0.3); border-color:#4CAF50; color:#A5D6A7; }
+.quiz-option.wrong { background:rgba(198,40,40,0.3); border-color:#EF5350; color:#FFCDD2; }
+.quiz-option.disabled { pointer-events:none; }
+
+.quiz-feedback {
+  padding:14px 18px; border-radius:8px;
+  font-size:0.9rem; font-weight:500; margin-bottom:16px;
+  display:none;
+}
+.quiz-feedback.show { display:block; }
+.quiz-feedback.correct { background:rgba(46,125,50,0.2); color:#A5D6A7; border:1px solid rgba(76,175,80,0.3); }
+.quiz-feedback.wrong { background:rgba(198,40,40,0.2); color:#FFCDD2; border:1px solid rgba(239,83,80,0.3); }
+
+.quiz-nav { display:flex; gap:10px; align-items:center; }
+.btn-quiz {
+  padding:10px 22px; border-radius:7px; border:none; cursor:pointer;
+  font-family:'DM Sans', sans-serif; font-size:0.9rem; font-weight:600;
+  transition:all 0.2s;
+}
+.btn-quiz.primary { background:#2E7D32; color:#fff; }
+.btn-quiz.primary:hover { background:#1B5E20; }
+.btn-quiz.secondary { background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.7); }
+.btn-quiz.secondary:hover { background:rgba(255,255,255,0.14); }
+.quiz-progress { color:rgba(255,255,255,0.4); font-size:0.85rem; margin-left:auto; }
+
+.quiz-result {
+  text-align:center; padding:20px 0; display:none;
+}
+.quiz-result.show { display:block; }
+.result-emoji { font-size:3rem; margin-bottom:12px; }
+.result-score {
+  font-family:'Playfair Display', serif;
+  font-size:2.5rem; font-weight:900; color:#fff;
+}
+.result-msg { color:rgba(255,255,255,0.6); margin-top:8px; }
+.result-badge {
+  display:inline-block; margin-top:20px;
+  background:#2E7D32; color:#fff;
+  padding:10px 24px; border-radius:8px;
+  font-weight:600; cursor:pointer; border:none;
+  font-family:'DM Sans', sans-serif;
+}
+
+/* URGENCES */
+#urgences { background:#FFF5F5; }
+.urgence-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+.urgence-card {
+  background:#fff;
+  border:2px solid #FFCDD2;
+  border-radius:12px; padding:22px;
+  text-align:center;
+}
+.urgence-num {
+  font-family:'Playfair Display', serif;
+  font-size:2rem; font-weight:900; color:#C62828;
+  margin-bottom:6px;
+}
+.urgence-label { font-weight:600; font-size:0.9rem; color:var(--dark); }
+.urgence-sub { font-size:0.78rem; color:var(--muted); margin-top:4px; }
+
+/* FOOTER */
+footer {
+  background:var(--dark);
+  padding:50px 60px 30px;
+  color:rgba(255,255,255,0.5);
+}
+.footer-inner { max-width:1100px; margin:0 auto; }
+.footer-top {
+  display:grid; grid-template-columns:2fr 1fr 1fr;
+  gap:60px; margin-bottom:40px;
+}
+.footer-brand { }
+.footer-logo {
+  font-family:'Playfair Display', serif;
+  font-size:1.4rem; font-weight:900; color:#fff;
+  margin-bottom:12px;
+}
+.footer-logo span { color:#66BB6A; }
+.footer-tagline { font-size:0.88rem; line-height:1.7; max-width:280px; }
+.footer-col h4 { color:#fff; font-size:0.9rem; font-weight:600; margin-bottom:14px; }
+.footer-col ul { list-style:none; }
+.footer-col li { margin-bottom:8px; }
+.footer-col a { color:rgba(255,255,255,0.4); text-decoration:none; font-size:0.85rem; transition:color 0.2s; }
+.footer-col a:hover { color:#fff; }
+.footer-bottom {
+  border-top:1px solid rgba(255,255,255,0.08);
+  padding-top:24px;
+  display:flex; justify-content:space-between; align-items:center;
+  font-size:0.82rem;
+}
+.footer-made { color:rgba(255,255,255,0.3); }
+.footer-made span { color:#66BB6A; }
+
+/* BG alternance */
+#sante { background:var(--bg); }
+#cyber { background:#EFF6FF; }
+#stress { background:#FFF8F0; }
+
+/* Divider */
+.section-divider {
+  height:4px; width:40px; border-radius:2px; margin-bottom:12px;
+}
+.div-green { background:var(--sante-accent); }
+.div-blue { background:var(--cyber-accent); }
+.div-orange { background:var(--stress-accent); }
+
+/* TIPS */
+.tips-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-top:32px; }
+.tip {
+  background:var(--card); border-radius:10px; padding:20px;
+  border-left:4px solid var(--sante-accent);
+  display:flex; gap:14px; align-items:flex-start;
+}
+.tip.cyber { border-left-color:var(--cyber-accent); }
+.tip.stress { border-left-color:var(--stress-accent); }
+.tip-num {
+  width:28px; height:28px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:0.75rem; font-weight:700; flex-shrink:0;
+  background:var(--sante); color:var(--sante-accent);
+}
+.tip.cyber .tip-num { background:var(--cyber); color:var(--cyber-accent); }
+.tip.stress .tip-num { background:var(--stress); color:var(--stress-accent); }
+.tip-text { font-size:0.88rem; color:var(--muted); line-height:1.7; }
+.tip-text strong { color:var(--dark); display:block; margin-bottom:2px; }
+
+/* ANIMATIONS */
+.reveal { opacity:0; transform:translateY(24px); transition:opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity:1; transform:none; }
+
+@keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.4} }
+
+/* RESPONSIVE */
+@media(max-width:900px) {
+  nav { padding:0 20px; }
+  .nav-links { display:none; }
+  #hero { padding:80px 24px 40px; }
+  .hero-content { grid-template-columns:1fr; gap:40px; }
+  .hero-title { font-size:2.6rem; }
+  .stats-bar { padding:24px; gap:30px; flex-wrap:wrap; }
+  .section { padding:60px 24px; }
+  .cards-grid { grid-template-columns:1fr; }
+  .cards-grid.two { grid-template-columns:1fr; }
+  .urgence-grid { grid-template-columns:1fr 1fr; }
+  .footer-top { grid-template-columns:1fr; gap:30px; }
+  .footer-bottom { flex-direction:column; gap:10px; text-align:center; }
+  .tips-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Bénin<span>Santé</span>360</div>
+  <div class="nav-links">
+    <a href="#sante">🏥 Santé</a>
+    <a href="#cyber">🛡️ Cybersécurité</a>
+    <a href="#stress">🧠 Bien-être</a>
+    <a href="#quiz-section">✅ Quiz</a>
+    <a href="#urgences">🚨 Urgences</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-pattern"></div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <span class="eyebrow-dot"></span>
+        Plateforme gratuite · Bénin 🇧🇯
+      </div>
+      <h1 class="hero-title">
+        Votre santé,<br>
+        votre sécurité,<br>
+        <span class="highlight">votre bien-être.</span>
+      </h1>
+      <p class="hero-sub">
+        BéninSanté360 est une plateforme gratuite qui regroupe des informations fiables sur la santé communautaire, la sécurité numérique et la gestion du stress — pour aider chaque Béninois à mieux vivre.
+      </p>
+      <div class="hero-btns">
+        <a href="#sante" class="btn-hero-main">Explorer les ressources</a>
+        <a href="#quiz-section" class="btn-hero-outline">Tester mes connaissances</a>
+      </div>
+    </div>
+    <div class="hero-pillars">
+      <a href="#sante" class="pillar">
+        <div class="pillar-icon p1">🏥</div>
+        <div class="pillar-text">
+          <div class="pillar-title">Santé Communautaire</div>
+          <div class="pillar-desc">Médicaments, premiers secours, symptômes</div>
+        </div>
+        <div class="pillar-arrow">→</div>
+      </a>
+      <a href="#cyber" class="pillar">
+        <div class="pillar-icon p2">🛡️</div>
+        <div class="pillar-text">
+          <div class="pillar-title">Sécurité Numérique</div>
+          <div class="pillar-desc">Arnaques, mots de passe, protection</div>
+        </div>
+        <div class="pillar-arrow">→</div>
+      </a>
+      <a href="#stress" class="pillar">
+        <div class="pillar-icon p3">🧠</div>
+        <div class="pillar-text">
+          <div class="pillar-title">Bien-être & Stress</div>
+          <div class="pillar-desc">Burnout, stress, santé mentale</div>
+        </div>
+        <div class="pillar-arrow">→</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat"><div class="stat-num">3<span>+</span></div><div class="stat-label">Domaines couverts</div></div>
+  <div class="stat"><div class="stat-num">30<span>+</span></div><div class="stat-label">Fiches pratiques</div></div>
+  <div class="stat"><div class="stat-num">15<span>+</span></div><div class="stat-label">Quiz interactifs</div></div>
+  <div class="stat"><div class="stat-num">100<span>%</span></div><div class="stat-label">Gratuit</div></div>
+</div>
+
+<!-- SANTÉ -->
+<section id="sante" class="section">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-divider div-green"></div>
+      <div class="section-eyebrow green">Module 1 · Santé Communautaire</div>
+      <h2 class="section-title">Médicaments & Premiers Secours</h2>
+      <p class="section-desc">Des informations basées sur la formation <strong>Medication Safety</strong> d'Alison pour aider les familles à utiliser les médicaments correctement et réagir en cas d'urgence.</p>
+    </div>
+
+    <div class="cards-grid reveal">
+      <div class="card">
+        <div class="card-icon">💊</div>
+        <div class="card-title">La règle des 5B</div>
+        <div class="card-text">Avant de prendre ou donner un médicament, vérifiez toujours : <strong>Bon patient</strong>, <strong>Bon médicament</strong>, <strong>Bonne dose</strong>, <strong>Bonne voie</strong>, <strong>Bon moment</strong>. Ces 5 vérifications évitent 80% des erreurs médicamenteuses.</div>
+        <span class="card-tag tag-green">Essentiel</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">⚠️</div>
+        <div class="card-title">Effets indésirables courants</div>
+        <div class="card-text">Nausées, vertiges, éruptions cutanées, somnolence. Si un symptôme apparaît après la prise d'un médicament, arrêtez et consultez un professionnel de santé immédiatement. Ne doublez jamais une dose oubliée.</div>
+        <span class="card-tag tag-green">Sécurité</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">🌡️</div>
+        <div class="card-title">Conservation des médicaments</div>
+        <div class="card-text">La plupart des médicaments se conservent entre <strong>15°C et 25°C</strong>, à l'abri de la chaleur et de l'humidité. Certains nécessitent le réfrigérateur. Vérifiez toujours la date de péremption avant utilisation.</div>
+        <span class="card-tag tag-green">Pratique</span>
+      </div>
+    </div>
+
+    <div style="margin-top:40px;" class="reveal">
+      <h3 style="font-family:'Playfair Display',serif; font-size:1.3rem; margin-bottom:20px; color:var(--dark);">Questions fréquentes sur les médicaments</h3>
+      <div class="accordion">
+        <div class="acc-item">
+          <div class="acc-header" onclick="toggleAcc(this)">
+            Que faire si on a oublié une dose ? <span class="acc-arrow">▼</span>
+          </div>
+          <div class="acc-body">
+            <p>Si vous vous souvenez peu après l'heure prévue, prenez la dose oubliée. Si c'est presque l'heure de la prochaine dose, <strong>sautez la dose oubliée</strong> et continuez normalement. Ne doublez jamais une dose — cela peut provoquer un surdosage dangereux.</p>
+          </div>
+        </div>
+        <div class="acc-item">
+          <div class="acc-header" onclick="toggleAcc(this)">
+            Peut-on mélanger plusieurs médicaments ? <span class="acc-arrow">▼</span>
+          </div>
+          <div class="acc-body">
+            <p>Certains médicaments peuvent interagir dangereusement entre eux. Évitez de mélanger des médicaments sans avis médical. Informez toujours votre médecin ou pharmacien de <strong>tous les médicaments</strong> que vous prenez, y compris les médicaments traditionnels.</p>
+          </div>
+        </div>
+        <div class="acc-item">
+          <div class="acc-header" onclick="toggleAcc(this)">
+            Comment réagir en cas d'empoisonnement médicamenteux ? <span class="acc-arrow">▼</span>
+          </div>
+          <div class="acc-body">
+            <ul>
+              <li>Appelez immédiatement le <strong>SAMU (13)</strong> ou le Centre Anti-Poison</li>
+              <li>Gardez l'emballage du médicament pour informer les secours</li>
+              <li>Ne faites <strong>pas vomir</strong> la personne sans avis médical</li>
+              <li>Restez avec la personne et surveillez sa respiration</li>
+            </ul>
+          </div>
+        </div>
+        <div class="acc-item">
+          <div class="acc-header" onclick="toggleAcc(this)">
+            Antibiotiques : comment les utiliser correctement ? <span class="acc-arrow">▼</span>
+          </div>
+          <div class="acc-body">
+            <p>Terminez toujours le traitement prescrit même si vous vous sentez mieux. Arrêter trop tôt peut créer des bactéries <strong>résistantes aux antibiotiques</strong>. Ne prenez jamais les antibiotiques d'une autre personne et ne gardez pas d'antibiotiques pour une prochaine fois.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tips-grid reveal">
+      <div class="tip"><div class="tip-num">1</div><div class="tip-text"><strong>Lisez la notice</strong> Chaque médicament a une notice. Lisez-la avant la première prise pour connaître les effets secondaires possibles.</div></div>
+      <div class="tip"><div class="tip-num">2</div><div class="tip-text"><strong>Stockez hors de portée des enfants</strong> Les médicaments doivent être dans une armoire fermée, inaccessible aux enfants de moins de 12 ans.</div></div>
+      <div class="tip"><div class="tip-num">3</div><div class="tip-text"><strong>Ne partagez pas vos médicaments</strong> Un médicament prescrit pour vous peut être dangereux pour une autre personne aux antécédents différents.</div></div>
+      <div class="tip"><div class="tip-num">4</div><div class="tip-text"><strong>Signalez les réactions</strong> Si un médicament provoque une réaction inhabituelle, signalez-le à votre médecin ou pharmacien immédiatement.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CYBERSÉCURITÉ -->
+<section id="cyber" class="section">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-divider div-blue"></div>
+      <div class="section-eyebrow blue">Module 2 · Sécurité Numérique</div>
+      <h2 class="section-title">Protégez-vous en ligne</h2>
+      <p class="section-desc">Basé sur la certification <strong>Introduction to Cybersecurity</strong> de Cisco Networking Academy. Apprenez à reconnaître les arnaques et à protéger vos données personnelles.</p>
+    </div>
+
+    <div class="cards-grid reveal">
+      <div class="card">
+        <div class="card-icon">🎣</div>
+        <div class="card-title">Le Phishing (Hameçonnage)</div>
+        <div class="card-text">Les escrocs envoient de faux SMS ou emails qui semblent venir de banques ou administrations. Ils demandent vos codes secrets. <strong>Aucune banque ne demande jamais votre PIN par message.</strong></div>
+        <span class="card-tag tag-blue">Arnaque fréquente</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔑</div>
+        <div class="card-title">Créer un bon mot de passe</div>
+        <div class="card-text">Un bon mot de passe contient au moins <strong>12 caractères</strong>, avec majuscules, chiffres et symboles. Évitez votre date de naissance, nom ou "123456". Utilisez un mot de passe différent pour chaque compte.</div>
+        <span class="card-tag tag-blue">Protection</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">📱</div>
+        <div class="card-title">Arnaques Mobile Money</div>
+        <div class="card-text">Au Bénin, les arnaques MTN/Moov sont fréquentes. Si quelqu'un vous demande de confirmer un code reçu par SMS pour "débloquer" une somme, c'est une arnaque. <strong>Ne partagez jamais vos codes OTP.</strong></div>
+        <span class="card-tag tag-blue">Bénin spécifique</span>
+      </div>
+    </div>
+
+    <div style="margin-top:40px;" class="reveal">
+      <h3 style="font-family:'Playfair Display',serif; font-size:1.3rem; margin-bottom:20px; color:var(--dark);">Les menaces numériques expliquées</h3>
+      <div class="accordion">
+        <div class="acc-item">
+          <div class="acc-header" onclick="toggleAcc(this)">
+            C'est quoi un virus informatique ? <span class="acc-arrow">▼</span>
+          </div>
+          <div class="acc-body">
+            <p>Un virus est un programme malveillant qui s'installe sur votre appareil à votre insu. Il peut voler vos informations, bloquer votre téléphone ou espionner vos messages. Pour se protéger : <strong>n'installez que des applications officielles</strong> (Play Store), ne cliquez pas sur des liens suspects, et mettez à jour régulièrement votre appareil.</p>
+          </div>
+        </div>
+        <div class="acc-item">
+          <div class="acc-header" onclick="toggleAcc(this)">
+            Comment reconnaître une arnaque en ligne ? <span class="acc-arrow">▼</span>
+          </div>
+          <div class="acc-body">
+            <ul>
+              <li>L'offre est <strong>trop belle pour être vraie</strong> (gain d'argent facile, prix incroyables)</li>
+              <li>On vous demande de payer à l'avance pour recevoir un "cadeau"</li>
+              <li>Un "inconnu" vous contacte pour une opportunité d'affaires urgente</li>
+              <li>Le message contient beaucoup de <strong>fautes d'orthographe</strong></li>
+              <li>On vous demande vos informations bancaires ou vos codes secrets</li>
+            </ul>
+          </div>
+        </div>
+        <div class="acc-item">
+          <div class="acc-header" onclick="toggleAcc(this)">
+            Comment sécuriser son compte Facebook ? <span class="acc-arrow">▼</span>
+          </div>
+          <div class="acc-body">
+            <ul>
+              <li>Activez la <strong>validation en deux étapes</strong> dans les paramètres</li>
+              <li>Utilisez un mot de passe fort et unique</li>
+              <li>Ne vous connectez pas depuis un cybercafé ou l'ordinateur de quelqu'un d'autre</li>
+              <li>Déconnectez-vous toujours après utilisation sur un appareil partagé</li>
+              <li>Vérifiez régulièrement les <strong>appareils connectés</strong> à votre compte</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tips-grid reveal">
+      <div class="tip cyber"><div class="tip-num">1</div><div class="tip-text"><strong>Wi-Fi public = danger</strong> Évitez de faire des transactions bancaires sur un Wi-Fi public non sécurisé. Votre connexion peut être interceptée.</div></div>
+      <div class="tip cyber"><div class="tip-num">2</div><div class="tip-text"><strong>Mettez à jour vos applications</strong> Les mises à jour corrigent des failles de sécurité. Ne repoussez pas les mises à jour de votre téléphone.</div></div>
+      <div class="tip cyber"><div class="tip-num">3</div><div class="tip-text"><strong>Sauvegardez vos données</strong> En cas de perte ou de vol, vos photos et documents sont perdus. Activez la sauvegarde automatique sur Google Drive ou iCloud.</div></div>
+      <div class="tip cyber"><div class="tip-num">4</div><div class="tip-text"><strong>Vérifiez les permissions</strong> Une application de lampe de poche n'a pas besoin d'accéder à vos contacts. Refusez les permissions inutiles.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- STRESS -->
+<section id="stress" class="section">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-divider div-orange"></div>
+      <div class="section-eyebrow orange">Module 3 · Bien-être & Stress</div>
+      <h2 class="section-title">Comprendre et gérer le stress</h2>
+      <p class="section-desc">Basé sur la formation de l'<strong>Université de Liège</strong> via France Université Numérique. Des outils concrets pour étudiants, soignants et toute personne sous pression.</p>
+    </div>
+
+    <div class="cards-grid reveal">
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <div class="card-title">Stress aigu vs stress chronique</div>
+        <div class="card-text">Le <strong>stress aigu</strong> est ponctuel (examen, dispute) et passe vite. Le <strong>stress chronique</strong> dure des semaines ou des mois et abîme le corps et l'esprit. Il faut apprendre à les distinguer pour mieux réagir.</div>
+        <span class="card-tag tag-orange">Comprendre</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔥</div>
+        <div class="card-title">Reconnaître le burnout</div>
+        <div class="card-text">Le burnout (épuisement professionnel) se manifeste par : fatigue intense même après repos, perte de motivation, irritabilité, sentiment d'inutilité. Il touche surtout les soignants, enseignants et étudiants surchargés.</div>
+        <span class="card-tag tag-orange">Alerte</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">🌿</div>
+        <div class="card-title">Stratégies de régulation</div>
+        <div class="card-text">Respiration abdominale (4 secondes inspirer, 4 tenir, 6 expirer), exercice physique régulier, sommeil suffisant (7-8h), parler à quelqu'un de confiance. Ces techniques réduisent le cortisol (hormone du stress).</div>
+        <span class="card-tag tag-orange">Solutions</span>
+      </div>
+    </div>
+
+    <div style="margin-top:40px;" class="reveal">
+      <h3 style="font-family:'Playfair Display',serif; font-size:1.3rem; margin-bottom:20px; color:var(--dark);">Outils pratiques de gestion du stress</h3>
+      <div class="accordion">
+        <div class="acc-item">
+          <div class="acc-header" onclick="toggleAcc(this)">
+            La respiration 4-4-6 : comment la pratiquer ? <span class="acc-arrow">▼</span>
+          </div>
+          <div class="acc-body">
+            <p>Cette technique active le système nerveux parasympathique (relaxation) :</p>
+            <ul>
+              <li><strong>Inspirez</strong> lentement par le nez pendant 4 secondes</li>
+              <li><strong>Retenez</strong> votre souffle pendant 4 secondes</li>
+              <li><strong>Expirez</strong> lentement par la bouche pendant 6 secondes</li>
+              <li>Répétez 5 fois. Pratiquez 2 fois par jour pour de meilleurs résultats.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="acc-item">
+          <div class="acc-header" onclick="toggleAcc(this)">
+            C'est quoi la pair-aidance ? <span class="acc-arrow">▼</span>
+          </div>
+          <div class="acc-body">
+            <p>La <strong>pair-aidance</strong> consiste à être soutenu par quelqu'un qui a vécu la même situation difficile. Contrairement au soutien professionnel, la pair-aidance offre une compréhension profonde basée sur l'expérience vécue. Elle favorise le sentiment de ne pas être seul face à ses difficultés et réduit la stigmatisation autour de la santé mentale.</p>
+          </div>
+        </div>
+        <div class="acc-item">
+          <div class="acc-header" onclick="toggleAcc(this)">
+            Quand faut-il consulter un professionnel ? <span class="acc-arrow">▼</span>
+          </div>
+          <div class="acc-body">
+            <ul>
+              <li>Le stress ou l'anxiété dure plus de <strong>2 semaines</strong> malgré vos efforts</li>
+              <li>Vous avez des pensées négatives récurrentes ou des idées sombres</li>
+              <li>Vous ne pouvez plus dormir ou manger normalement</li>
+              <li>Votre vie professionnelle ou familiale est sérieusement perturbée</li>
+              <li>Vous avez recours à l'alcool ou d'autres substances pour vous calmer</li>
+            </ul>
+            <p style="margin-top:10px;">👉 Consulter un médecin ou psychologue n'est pas un signe de faiblesse, c'est un acte de courage.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tips-grid reveal">
+      <div class="tip stress"><div class="tip-num">1</div><div class="tip-text"><strong>Bougez chaque jour</strong> 30 minutes de marche réduit le niveau de cortisol de 15%. L'exercice est le meilleur antistress naturel.</div></div>
+      <div class="tip stress"><div class="tip-num">2</div><div class="tip-text"><strong>Limitez les réseaux sociaux</strong> Passer trop de temps sur les réseaux sociaux augmente l'anxiété. Fixez-vous une limite de 1h par jour.</div></div>
+      <div class="tip stress"><div class="tip-num">3</div><div class="tip-text"><strong>Parlez à quelqu'un</strong> Ne gardez pas le stress pour vous. Parler à un ami, un proche ou un conseiller libère une pression énorme.</div></div>
+      <div class="tip stress"><div class="tip-num">4</div><div class="tip-text"><strong>Planifiez vos journées</strong> L'incertitude génère du stress. Une to-do liste simple le matin aide à structurer la journée et réduire l'anxiété.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section id="quiz-section" class="section" style="background:var(--bg);">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-eyebrow green">Testez vos connaissances</div>
+      <h2 class="section-title">Quiz interactif</h2>
+      <p class="section-desc">Choisissez un module et répondez aux questions pour tester ce que vous avez appris.</p>
+    </div>
+    <div class="quiz-section reveal">
+      <div class="quiz-title">Quiz BéninSanté360</div>
+      <div class="quiz-sub">Sélectionnez un module pour commencer</div>
+      <div class="quiz-tabs">
+        <button class="quiz-tab active" onclick="loadQuiz('sante', this)">💊 Santé</button>
+        <button class="quiz-tab" onclick="loadQuiz('cyber', this)">🛡️ Cybersécurité</button>
+        <button class="quiz-tab" onclick="loadQuiz('stress', this)">🧠 Bien-être</button>
+      </div>
+      <div id="quiz-area">
+        <div class="quiz-question" id="q-text"></div>
+        <div class="quiz-options" id="q-options"></div>
+        <div class="quiz-feedback" id="q-feedback"></div>
+        <div class="quiz-nav">
+          <button class="btn-quiz primary" id="btn-next" onclick="nextQuestion()" style="display:none">Question suivante →</button>
+          <button class="btn-quiz secondary" onclick="restartQuiz()">↺ Recommencer</button>
+          <div class="quiz-progress" id="q-progress"></div>
+        </div>
+        <div class="quiz-result" id="quiz-result">
+          <div class="result-emoji" id="r-emoji"></div>
+          <div class="result-score" id="r-score"></div>
+          <div class="result-msg" id="r-msg"></div>
+          <button class="result-badge" onclick="restartQuiz()">Réessayer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- URGENCES -->
+<section id="urgences" class="section" style="background:#FFF5F5;">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-divider" style="background:#C62828;"></div>
+      <div class="section-eyebrow" style="color:#C62828;">Numéros d'urgence · Bénin</div>
+      <h2 class="section-title">En cas d'urgence</h2>
+      <p class="section-desc">Gardez ces numéros dans votre téléphone. En cas d'urgence, appelez immédiatement.</p>
+    </div>
+    <div class="urgence-grid reveal">
+      <div class="urgence-card">
+        <div class="urgence-num">13</div>
+        <div class="urgence-label">SAMU</div>
+        <div class="urgence-sub">Urgences médicales</div>
+      </div>
+      <div class="urgence-card">
+        <div class="urgence-num">118</div>
+        <div class="urgence-label">Pompiers</div>
+        <div class="urgence-sub">Incendie & secours</div>
+      </div>
+      <div class="urgence-card">
+        <div class="urgence-num">166</div>
+        <div class="urgence-label">Police</div>
+        <div class="urgence-sub">Sécurité publique</div>
+      </div>
+      <div class="urgence-card">
+        <div class="urgence-num">197</div>
+        <div class="urgence-label">Gendarmerie</div>
+        <div class="urgence-sub">Zones rurales</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">Bénin<span>Santé</span>360</div>
+        <p class="footer-tagline">Une plateforme gratuite créée pour aider la population béninoise à accéder à des informations fiables sur la santé, la sécurité numérique et le bien-être.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Modules</h4>
+        <ul>
+          <li><a href="#sante">🏥 Santé & Médicaments</a></li>
+          <li><a href="#cyber">🛡️ Cybersécurité</a></li>
+          <li><a href="#stress">🧠 Bien-être & Stress</a></li>
+          <li><a href="#quiz-section">✅ Quiz interactif</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Créé par</h4>
+        <ul>
+          <li><a href="#">Carlos Rodrigue BABAODI</a></li>
+          <li><a href="#">Étudiant en Physique-Chimie</a></li>
+          <li><a href="mailto:carlosbabaodi288@gmail.com">carlosbabaodi288@gmail.com</a></li>
+          <li><a href="#">Bénin 🇧🇯</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-made">© 2026 <span>BéninSanté360</span> · Créé par Carlos Rodrigue BABAODI · Tous droits réservés</div>
+      <div style="font-size:0.8rem;">Informations à titre éducatif uniquement — consultez un professionnel de santé</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ACCORDION
+function toggleAcc(header) {
+  const item = header.parentElement;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.acc-item.open').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// SCROLL REVEAL
+const reveals = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(el => obs.observe(el));
+
+// QUIZ DATA
+const quizData = {
+  sante: [
+    { q: "Quelle est la règle fondamentale avant de prendre un médicament ?", opts: ["La règle des 5B (Bon patient, Bon médicament, Bonne dose, Bonne voie, Bon moment)", "Prendre le médicament le plus cher disponible", "Doubler la dose si on est très malade", "Prendre le médicament d'un ami qui a eu les mêmes symptômes"], correct: 0, exp: "La règle des 5B est fondamentale : elle permet d'éviter 80% des erreurs médicamenteuses." },
+    { q: "Que faire si vous avez oublié une dose de médicament et que c'est bientôt l'heure de la suivante ?", opts: ["Doubler la prochaine dose pour compenser", "Sauter la dose oubliée et continuer normalement", "Arrêter complètement le traitement", "Prendre immédiatement la dose oubliée"], correct: 1, exp: "Ne jamais doubler une dose ! Sauter la dose oubliée est la bonne décision pour éviter un surdosage." },
+    { q: "À quelle température se conservent la plupart des médicaments ?", opts: ["0°C à 5°C (au réfrigérateur)", "15°C à 25°C, à l'abri de la chaleur", "30°C à 40°C", "N'importe quelle température"], correct: 1, exp: "La plupart des médicaments se conservent entre 15°C et 25°C, à l'abri de la chaleur et de l'humidité." },
+    { q: "Que faire en cas d'empoisonnement médicamenteux ?", opts: ["Faire vomir immédiatement la personne", "Attendre que ça passe tout seul", "Appeler le SAMU (13) immédiatement et garder l'emballage", "Donner beaucoup d'eau à la personne"], correct: 2, exp: "Appelez le SAMU (13) immédiatement. Gardez l'emballage. Ne faites pas vomir sans avis médical." },
+    { q: "Pourquoi faut-il terminer un traitement antibiotique même si on se sent mieux ?", opts: ["Pour ne pas gaspiller les médicaments achetés", "Pour éviter de créer des bactéries résistantes aux antibiotiques", "Les antibiotiques n'ont aucun effet réel", "Pour plaire au médecin"], correct: 1, exp: "Arrêter trop tôt crée des bactéries résistantes, rendant les infections futures plus difficiles à traiter." }
+  ],
+  cyber: [
+    { q: "Qu'est-ce que le phishing (hameçonnage) ?", opts: ["Un jeu en ligne populaire", "Une technique d'arnaque par faux messages pour voler vos données", "Un virus qui détruit votre téléphone", "Une application de pêche"], correct: 1, exp: "Le phishing utilise de faux messages imitant des banques ou administrations pour voler vos informations." },
+    { q: "Quel est le signe d'un bon mot de passe ?", opts: ["Votre date de naissance", "Le mot 'password' suivi d'un chiffre", "Au moins 12 caractères avec majuscules, chiffres et symboles", "Votre prénom en minuscules"], correct: 2, exp: "Un bon mot de passe a au moins 12 caractères et combine majuscules, minuscules, chiffres et symboles." },
+    { q: "Quelqu'un vous envoie un code par SMS et vous demande de le partager pour 'débloquer' une somme d'argent. Que faites-vous ?", opts: ["Vous partagez le code car l'offre est intéressante", "Vous ignorez et signalez — c'est une arnaque Mobile Money", "Vous demandez d'abord combien d'argent vous recevrez", "Vous transmettez le code à votre famille"], correct: 1, exp: "C'est une arnaque classique au Bénin ! Ne partagez jamais un code OTP reçu par SMS à qui que ce soit." },
+    { q: "Pourquoi est-il dangereux d'utiliser le Wi-Fi public pour des transactions bancaires ?", opts: ["C'est trop lent", "Votre connexion peut être interceptée par des pirates", "Les banques bloquent les connexions Wi-Fi", "Ce n'est pas dangereux du tout"], correct: 1, exp: "Sur un Wi-Fi public non sécurisé, vos données peuvent être interceptées par des pirates sur le même réseau." },
+    { q: "Comment sécuriser votre compte Facebook efficacement ?", opts: ["Utiliser le même mot de passe que votre email", "Activer la validation en deux étapes et utiliser un mot de passe fort unique", "Rendre votre profil public pour plus de visibilité", "Partager votre mot de passe avec un ami de confiance"], correct: 1, exp: "La validation en deux étapes + mot de passe fort unique est la meilleure protection pour vos comptes en ligne." }
+  ],
+  stress: [
+    { q: "Quelle est la différence entre stress aigu et stress chronique ?", opts: ["Il n'y a aucune différence", "Le stress aigu est ponctuel et passe vite, le stress chronique dure des semaines/mois", "Le stress chronique est moins dangereux", "Le stress aigu dure plus longtemps"], correct: 1, exp: "Le stress aigu est temporaire (avant un examen). Le stress chronique persiste et abîme progressivement la santé." },
+    { q: "Quels sont les signes du burnout ?", opts: ["Beaucoup d'énergie et d'enthousiasme", "Fatigue intense, perte de motivation, irritabilité, sentiment d'inutilité", "Augmentation de la productivité", "Amélioration des relations sociales"], correct: 1, exp: "Le burnout se manifeste par une fatigue profonde, la perte de sens au travail et une irritabilité croissante." },
+    { q: "Quelle technique de respiration aide à réduire le stress rapidement ?", opts: ["Respirer très vite pendant 30 secondes", "Retenir sa respiration le plus longtemps possible", "La respiration 4-4-6 : inspirer 4s, retenir 4s, expirer 6s", "Respirer uniquement par la bouche"], correct: 2, exp: "La respiration 4-4-6 active le système nerveux parasympathique qui produit une réponse de relaxation naturelle." },
+    { q: "Qu'est-ce que la pair-aidance ?", opts: ["Un médicament contre le stress", "Le soutien entre personnes ayant vécu des expériences similaires", "Une technique de méditation japonaise", "Un type de thérapie réservée aux médecins"], correct: 1, exp: "La pair-aidance, c'est être soutenu par quelqu'un qui a vécu la même difficulté. Elle réduit le sentiment d'isolement." },
+    { q: "Combien d'heures de marche par semaine suffit pour réduire significativement le stress ?", opts: ["30 minutes par jour réduit le cortisol de 15%", "10 heures par jour minimum", "Le sport n'a aucun effet sur le stress", "Seulement 5 minutes de marche par semaine"], correct: 0, exp: "30 minutes de marche quotidienne réduit le cortisol (hormone du stress) de 15% et améliore l'humeur." }
+  ]
+};
+
+let currentModule = 'sante';
+let currentQ = 0;
+let score = 0;
+let answered = false;
+
+function loadQuiz(module, tab) {
+  currentModule = module;
+  currentQ = 0; score = 0; answered = false;
+  document.querySelectorAll('.quiz-tab').forEach(t => t.classList.remove('active'));
+  tab.classList.add('active');
+  document.getElementById('quiz-result').classList.remove('show');
+  showQuestion();
+}
+
+function showQuestion() {
+  const data = quizData[currentModule];
+  const q = data[currentQ];
+  document.getElementById('q-text').textContent = q.q;
+  document.getElementById('q-options').innerHTML = q.opts.map((o, i) =>
+    `<button class="quiz-option" onclick="answer(${i})">${o}</button>`
+  ).join('');
+  document.getElementById('q-feedback').className = 'quiz-feedback';
+  document.getElementById('q-feedback').textContent = '';
+  document.getElementById('btn-next').style.display = 'none';
+  document.getElementById('q-progress').textContent = `${currentQ+1} / ${data.length}`;
+  answered = false;
+}
+
+function answer(idx) {
+  if (answered) return;
+  answered = true;
+  const data = quizData[currentModule];
+  const q = data[currentQ];
+  const opts = document.querySelectorAll('.quiz-option');
+  opts.forEach(o => o.classList.add('disabled'));
+  const fb = document.getElementById('q-feedback');
+  if (idx === q.correct) {
+    opts[idx].classList.add('correct');
+    fb.textContent = '✅ Correct ! ' + q.exp;
+    fb.className = 'quiz-feedback correct show';
+    score++;
+  } else {
+    opts[idx].classList.add('wrong');
+    opts[q.correct].classList.add('correct');
+    fb.textContent = '❌ Pas tout à fait. ' + q.exp;
+    fb.className = 'quiz-feedback wrong show';
+  }
+  if (currentQ < data.length - 1) {
+    document.getElementById('btn-next').style.display = 'inline-block';
+  } else {
+    setTimeout(showResult, 1200);
+  }
+}
+
+function nextQuestion() {
+  currentQ++;
+  showQuestion();
+}
+
+function showResult() {
+  document.getElementById('quiz-area').querySelector('.quiz-question').textContent = '';
+  document.getElementById('q-options').innerHTML = '';
+  document.getElementById('q-feedback').className = 'quiz-feedback';
+  document.getElementById('btn-next').style.display = 'none';
+  document.getElementById('q-progress').textContent = '';
+  const total = quizData[currentModule].length;
+  const pct = Math.round((score/total)*100);
+  const result = document.getElementById('quiz-result');
+  document.getElementById('r-emoji').textContent = pct >= 80 ? '🏆' : pct >= 60 ? '👍' : '📚';
+  document.getElementById('r-score').textContent = `${score} / ${total} — ${pct}%`;
+  document.getElementById('r-msg').textContent = pct >= 80
+    ? 'Excellent ! Vous maîtrisez ce sujet.'
+    : pct >= 60 ? 'Bien ! Relisez les sections pour améliorer votre score.'
+    : 'Continuez à apprendre ! Relisez le module et réessayez.';
+  result.classList.add('show');
+}
+
+function restartQuiz() {
+  currentQ = 0; score = 0; answered = false;
+  document.getElementById('quiz-result').classList.remove('show');
+  showQuestion();
+}
+
+// Init quiz
+loadQuiz('sante', document.querySelector('.quiz-tab.active'));
+
+// Active nav on scroll
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if(window.scrollY >= s.offsetTop - 80) current = s.id; });
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#'+current);
+  });
+});
+</script>
+</body>
+</html>
